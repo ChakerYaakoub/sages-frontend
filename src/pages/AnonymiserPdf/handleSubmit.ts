@@ -1,11 +1,5 @@
 import axios from "axios";
 
-// interface AnonymizeRequest {
-//   file: File;
-//   mode: string;
-//   filters?: string[];
-// }
-
 export const handleSubmit = async (
   pdfFile: File,
   selectedOption: string,
@@ -20,7 +14,7 @@ export const handleSubmit = async (
       formData.append("filters", JSON.stringify(selectedFilters));
     }
 
-    const response = await axios.post<Blob>("/api/anonymize-pdf", formData, {
+    const response = await axios.post<Blob>("http://127.0.0.1:5000/api/anonymize-pdf", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
