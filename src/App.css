@@ -349,8 +349,8 @@ div::first-letter {
 }
 
 .newPageSection {
-  padding-block-start: calc(var(--section-padding) + 30px) !important;
-  padding-block-end: 40px;
+  padding-block-start: calc(var(--section-padding) + 20px) !important;
+  padding-block-end: 0px !important;
   background-color: white !important;
 }
 
@@ -506,7 +506,7 @@ div::first-letter {
   }
   .newPageSection {
     --section-padding: 70px;
-    padding-block-start: calc(var(--section-padding) + 70px) !important;
+    padding-block-start: calc(var(--section-padding) + 50px) !important;
     min-height: 100vh;
   }
 }

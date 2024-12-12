@@ -1,0 +1,141 @@
+.pdf-dropzone-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pdf-dropzone {
+  border: 2px dashed var(--theme-color);
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--cultured);
+}
+
+.pdf-dropzone.active {
+  border-color: var(--background-color);
+  background-color: rgba(0, 108, 181, 0.1);
+}
+
+.pdf-dropzone .upload-icon {
+  font-size: 48px;
+  color: var(--theme-color);
+  margin-bottom: 15px;
+}
+
+.pdf-dropzone p {
+  color: var(--sonic-silver);
+  margin: 0;
+}
+
+.file-input {
+  display: none;
+}
+
+.pdf-preview {
+  width: 100%;
+  padding: 20px;
+  background-color: var(--cultured);
+  border-radius: 10px;
+}
+
+.pdf-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 16px;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000;
+}
+
+.page-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.page-controls button {
+  padding: 5px 10px;
+  background-color: var(--theme-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.page-controls button:disabled {
+  background-color: var(--gray-x-11);
+  cursor: not-allowed;
+}
+
+.page-controls button:hover:not(:disabled) {
+  background-color: var(--background-color);
+}
+
+.pdf-document {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pdf-page {
+  max-width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-page canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+
+@media (max-width: 768px) {
+  .pdf-dropzone {
+    padding: 20px;
+  }
+
+  .pdf-controls {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .page-controls {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.pdf-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  color: var(--theme-color);
+  font-size: 1.2rem;
+}
+
+.pdf-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  color: #ff4444;
+  font-size: 1.2rem;
+}

@@ -10,10 +10,10 @@ const path = require('path');
 // Define the list of routes
 // components
 // pages 
-const folder = 'pages'
+const folder = 'components'
 const appRoutes = [
 
-  { path: `${folder}/AnonymiserPdf`, title: 'AnonymiserPdf' },
+  { path: `${folder}/LayoutEdit`, title: 'LayoutEdit' },
 
 
 ];
