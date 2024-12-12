@@ -1,0 +1,204 @@
+.view-all-button-container {
+  font-weight: 600;
+  width: fit-content;
+  margin-left: auto;
+  padding: 10px 0px 30px 0px;
+  font-size: 14px;
+  /* font-size: var(--fs-17); */
+}
+
+.view-all-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--theme-color);
+  /* padding: 10px 0; */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.view-all-button:hover {
+  /* color: var(--black); */
+  /* text-decoration: underline; */
+}
+
+.view-all-button .react-icon {
+  padding-top: 3px;
+  color: var(--theme-color);
+  color: var(--black);
+  transition: color 0.3s ease, transform 0.3s ease;
+  /* transition: var(--transition); */
+}
+
+.view-all-button:hover .react-icon {
+  color: var(--black);
+  /* transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg); */
+  transform: translateX(5px);
+}
+
+.has-scrollbar {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-block-end: 30px;
+  margin-block-end: -15px;
+  scroll-snap-type: inline mandatory;
+}
+.flexDivScroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-block-end: 30px;
+  margin-block-end: -15px;
+  scroll-snap-type: inline mandatory;
+}
+
+.scrollbar-item {
+  min-width: 100%;
+  scroll-snap-align: start;
+}
+
+.has-scrollbar::-webkit-scrollbar-track {
+  background-color: var(--black_20);
+}
+
+.has-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--black_70);
+}
+
+.has-scrollbar::-webkit-scrollbar-button {
+  width: calc(25% - 25px);
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-10);
+}
+
+.card-content {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  background-color: var(--white_09);
+  border-radius: var(--radius-8);
+  padding: 20px 25px;
+  align-content: flex-end;
+  opacity: 0;
+  display: grid;
+  /*display: none;
+  */
+  transition: var(--transition);
+  -webkit-border-radius: var(--radius-8);
+  -moz-border-radius: var(--radius-8);
+  -ms-border-radius: var(--radius-8);
+  -o-border-radius: var(--radius-8);
+  -webkit-transition: var(--transition);
+  -moz-transition: var(--transition);
+  -ms-transition: var(--transition);
+  -o-transition: var(--transition);
+}
+
+.card:is(:hover, :focus-within, :active) .card-content {
+  opacity: 1;
+  /* display: grid; */
+}
+
+.card-content > a > .react-icon {
+  /* color: var(--black); */
+  font-size: 40px;
+  transform: rotate(-45deg);
+}
+.card-content > a {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.card-text {
+  font-family: var(--ff-poppins);
+}
+
+.news-card .card-text {
+  margin-block-end: 5px;
+}
+
+.img-holder {
+  /* aspect-ratio: var(--width) / var(--height); */
+  aspect-ratio: 600 /675 !important;
+  background-color: var(--light-gray);
+  overflow: hidden;
+}
+.card-link-to:hover {
+  text-decoration: underline;
+  color: var(--theme-color);
+}
+
+.card-content > a > .react-icon:hover {
+  color: var(--theme-color);
+}
+/*-----------------------------------*\
+  #MEDIA QUERIES
+\*-----------------------------------*/
+
+@media (min-width: 576px) {
+  .scrollbar-item {
+    min-width: calc(50% - 20px);
+  }
+  .flexDivScroll {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-content {
+    padding: 30px 35px;
+  }
+
+  .card-content > .react-icon {
+    top: 30px;
+    right: 30px;
+  }
+  /* .flexDivScroll {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  } */
+}
+
+@media (min-width: 1200px) {
+  .has-scrollbar {
+    gap: 40px;
+  }
+
+  .scrollbar-item {
+    min-width: calc(33.33% - 26.66px);
+  }
+  .flexDivScroll {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+/* Add this new rule for zoom effect on image hover */
+.img-cover {
+  transition: transform 0.3s ease;
+  /* Smooth transition for zoom effect */
+  -webkit-transition: transform 0.3s ease;
+  -moz-transition: transform 0.3s ease;
+  -ms-transition: transform 0.3s ease;
+  -o-transition: transform 0.3s ease;
+}
+
+.card:is(:hover, :focus-within, :active) .img-cover {
+  transform: scale(1.1); /* Scale the image to 110% on hover */
+}

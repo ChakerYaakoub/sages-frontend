@@ -1,0 +1,69 @@
+/* /////// about use  */
+
+.about-us {
+  /* Add margin-top for the first paragraph */
+  margin-top: 20px;
+}
+
+.hiddenInPcAboutUs {
+  display: none;
+}
+
+.hiddenInMobileAboutUs {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hiddenInPcAboutUs {
+    display: block;
+  }
+}
+
+@media (max-width: 767px) {
+  .hiddenInMobileAboutUs {
+    display: block;
+  }
+}
+
+/* Style paragraphs */
+#about-us p {
+  /* Add padding at the beginning of each paragraph */
+  text-indent: 20px;
+}
+
+/* Style unordered list items */
+#about-us ul {
+  list-style: none;
+
+  counter-reset: my-counter;
+}
+
+/* Style unordered list items */
+#about-us ul li {
+  position: relative;
+  margin-bottom: 10px; /*10px*/
+  padding-left: 1rem; /*20px*/
+  margin-left: 1rem; /*20px*/
+}
+
+#about-us ul li:before {
+  /* content: counter(my-counter) ". ";
+  counter-increment: my-counter; */
+
+  content: "\25CB";
+  position: absolute;
+  left: -0.9rem; /*10px*/
+  color: var(--theme-color);
+  font-weight: bold;
+}
+
+/* Style nested unordered list items */
+#about-us ul ul li {
+  list-style: circle !important; /* Use circle bullets for nested list items */
+  padding-left: 20px; /* Add padding for indentation */
+}
+
+/* Style list items */
+#about-us li {
+  margin-bottom: 5px; /* Add space between list items */
+}

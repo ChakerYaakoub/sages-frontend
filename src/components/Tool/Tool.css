@@ -1,0 +1,61 @@
+/* Your CSS styles here */
+.tool-container {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  cursor: pointer;
+  padding: 1rem;
+
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+.tool-container:hover {
+  transform: scale(1.02);
+  -webkit-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -o-transform: scale(1.02);
+}
+
+.tool-container:hover .tool-icon {
+  font-size: 5.5rem;
+}
+.tool-icon {
+  font-size: 5rem;
+  color: var(--theme-color);
+  display: flex;
+  height: 5.5rem;
+  transition: all 0.3s ease;
+
+  align-items: center;
+}
+
+.tool-title {
+  font-size: 2rem;
+  color: var(--black);
+  font-weight: 600;
+}
+
+.tool-description {
+  font-size: 1.5rem;
+}
+
+.hiddenInMobile {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .hiddenInMobile {
+    display: inline-block;
+    padding-left: 1rem;
+  }
+  .visibleInMobile {
+    display: none;
+  }
+  .tool-icon {
+    font-size: 4rem;
+    padding-bottom: 1rem;
+  }
+}

@@ -1,0 +1,63 @@
+/* Centering the loader container */
+.my-loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Styling the loader */
+.my-loader {
+  width: 120px; /* Increase size */
+  aspect-ratio: 1;
+  display: grid;
+  margin: 20px; /* Add margin */
+}
+
+.my-loader:before,
+.my-loader:after {
+  content: "";
+  grid-area: 1/1;
+  color: var(--theme-color);
+  /* color: #25b09b;  */
+
+  animation: l19 1.5s infinite linear;
+  -webkit-animation: l19 1.5s infinite linear;
+}
+
+.my-loader:before {
+  margin: 5px 20px;
+  background: currentColor;
+}
+
+.my-loader:after {
+  border: solid;
+  border-width: 5px 20px;
+  --s: 0;
+}
+
+@keyframes l19 {
+  0% {
+    transform: perspective(100px) rotate3d(1, var(--s, 1), 0, 0);
+  }
+  25% {
+    transform: perspective(100px) rotate3d(1, var(--s, 1), 0, 90deg);
+  }
+  25.01% {
+    transform: perspective(100px) rotate3d(1, var(--s, 1), 0, 90deg);
+  }
+  40%,
+  60% {
+    transform: perspective(100px) rotate3d(1, var(--s, 1), 0, 180deg);
+  }
+  75% {
+    transform: perspective(100px) rotate3d(1, var(--s, 1), 0, 270deg);
+  }
+  75.01% {
+    transform: perspective(100px) rotate3d(1, var(--s, 1), 0, 270deg);
+  }
+  90%,
+  100% {
+    transform: perspective(100px) rotate3d(1, var(--s, 1), 0, 360deg);
+  }
+}
