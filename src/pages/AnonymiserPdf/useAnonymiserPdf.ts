@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
+import { useLoading } from "../../context/LoadingContext";
 
 export type AnonymiserPdfProps = object;
 
@@ -34,21 +35,27 @@ export const useAnonymiserPdf = (props: AnonymiserPdfProps) => {
   const [selectedOption, setSelectedOption] = useState<string>("auto");
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const { setIsLoading, isLoading } = useLoading();
+  const [error, setError] = useState<string | null>(null);
 
   // set is open false in the tablet
   const isTablet = window.innerWidth < 768;
   const [isOpen, setIsOpen] = useState(!isTablet);
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-  const handleFileSelect = (file: File) => {
-    setPdfFile(file);
-  };
 
-  const handleLoadSuccess = (numPages: number) => {
+  const memoizedPdfFile = useMemo(() => pdfFile, [pdfFile]);
+
+  const handleToggle = useCallback(() => {
+    setIsOpen(!isOpen);
+  }, [isOpen]);
+
+  const handleFileSelect = useCallback((file: File) => {
+    setPdfFile(file);
+  }, []);
+
+  const handleLoadSuccess = useCallback((numPages: number) => {
     console.log("PDF loaded, total pages:", numPages);
     // Handle PDF load success
-  };
+  }, []);
 
   return {
     ...props,
@@ -56,12 +63,16 @@ export const useAnonymiserPdf = (props: AnonymiserPdfProps) => {
     handleToggle,
     handleFileSelect,
     handleLoadSuccess,
+    isLoading,
+    setIsLoading,
     radioOptions,
     filterOptions,
-    pdfFile,
+    pdfFile: memoizedPdfFile,
     selectedOption,
     setSelectedOption,
     selectedFilters,
     setSelectedFilters,
+    error,
+    setError,
   };
 };

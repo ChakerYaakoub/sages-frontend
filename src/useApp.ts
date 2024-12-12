@@ -1,5 +1,8 @@
+import { useLoading } from "./context/LoadingContext";
+
 export type UseAppProps = object;
 
 export const useApp = (props: UseAppProps) => {
-  return { ...props };
+  const { isLoading, setIsLoading } = useLoading();
+  return { ...props, isLoading, setIsLoading };
 };

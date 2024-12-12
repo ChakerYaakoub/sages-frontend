@@ -29,6 +29,44 @@ const PDFDropZone: React.FC<PDFDropZoneProps> = ({
     setNumPages,
   } = usePDFDropZone({ onFileSelect, onLoadSuccess, onDelete });
 
+  // Memoize the PDF URL to prevent unnecessary re-renders
+  const pdfUrl = React.useMemo(
+    () => (pdfFile ? URL.createObjectURL(pdfFile) : null),
+    [pdfFile]
+  );
+
+  // Memoize the Document component
+  const PdfDocument = React.memo(({ url }: { url: string }) => (
+    <Document
+      file={url}
+      onLoadSuccess={({ numPages }) => {
+        setNumPages(numPages);
+        onLoadSuccess?.(numPages);
+      }}
+      onLoadError={(error) => {
+        console.error("Error loading PDF:", error);
+      }}
+      className="pdf-document"
+    >
+      <Page
+        pageNumber={pageNumber}
+        className="pdf-page"
+        renderTextLayer={false}
+        renderAnnotationLayer={false}
+        scale={1.0}
+      />
+    </Document>
+  ));
+
+  // Clean up URL object when component unmounts or PDF changes
+  React.useEffect(() => {
+    return () => {
+      if (pdfUrl) {
+        URL.revokeObjectURL(pdfUrl);
+      }
+    };
+  }, [pdfUrl]);
+
   return (
     <div className="pdf-dropzone-container">
       {!pdfFile ? (
@@ -67,29 +105,11 @@ const PDFDropZone: React.FC<PDFDropZoneProps> = ({
               </button>
             </div>
           </div>
-          <Document
-            file={URL.createObjectURL(pdfFile)}
-            onLoadSuccess={({ numPages }) => {
-              setNumPages(numPages);
-              onLoadSuccess?.(numPages);
-            }}
-            onLoadError={(error) => {
-              console.error("Error loading PDF:", error);
-            }}
-            className="pdf-document"
-          >
-            <Page
-              pageNumber={pageNumber}
-              className="pdf-page"
-              renderTextLayer={false}
-              renderAnnotationLayer={false}
-              scale={1.0}
-            />
-          </Document>
+          {pdfUrl && <PdfDocument url={pdfUrl} />}
         </div>
       )}
     </div>
   );
 };
 
-export default PDFDropZone;
+export default React.memo(PDFDropZone);

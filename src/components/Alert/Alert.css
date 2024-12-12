@@ -1,0 +1,53 @@
+#myAlert {
+  position: absolute;
+  width: 80%;
+  left: 50%;
+  top: 30%; /* Start position is 30% from the top */
+  transform: translateX(-50%);
+  animation-name: example;
+  animation-duration: 10s;
+  height: 20%;
+  opacity: 0;
+  transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -ms-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  z-index: 99999;
+}
+
+.ToClose {
+  position: absolute;
+  right: 1%;
+  top: 4%;
+  font-size: 1.5rem;
+}
+
+@keyframes example {
+  0% {
+    top: -20%; /* Start off-screen above the viewport */
+    opacity: 0; /* Invisible */
+  }
+  25% {
+    top: 18%; /* Move down to nb% from the top */
+    opacity: 1; /* Fully visible */
+  }
+  50% {
+    top: 18%; /* Stay at nb% from the top */
+    opacity: 1; /* Fully visible */
+  }
+  75% {
+    top: -20%; /* Move up back off-screen */
+    opacity: 1; /* Start to hide */
+  }
+  100% {
+    top: -20%; /* End off-screen above the viewport */
+    opacity: 0; /* Fully invisible */
+  }
+}
+
+/* @media (max-width: 1024px) {
+  #myAlert {
+    left: 10%;
+  }
+} */

@@ -5,6 +5,15 @@ import LayoutEdit from "../../components/LayoutEdit/LayoutEdit";
 import PDFDropZone from "../../components/PDFDropZone/PDFDropZone";
 import SidebarContent from "../../components/SidebarContentAnonymiserPdf/SidebarContent";
 import { handleSubmit } from "./handleSubmit";
+import { useAlert } from "../../context/AlertContext";
+import { AlertType } from "../../models/Alert/AlertTypes";
+import { AlertVariant } from "../../models/Alert/AlertTypes";
+
+// Create memoized PDFDropZone component
+const MemoizedPDFDropZone = React.memo(PDFDropZone);
+
+// Create memoized SidebarContent component
+const MemoizedSidebarContent = React.memo(SidebarContent);
 
 const AnonymiserPdf: React.FC = (props: AnonymiserPdfProps) => {
   const {
@@ -12,6 +21,8 @@ const AnonymiserPdf: React.FC = (props: AnonymiserPdfProps) => {
     radioOptions,
     filterOptions,
     selectedOption,
+    isLoading,
+
     setSelectedOption,
     selectedFilters,
     setSelectedFilters,
@@ -19,18 +30,58 @@ const AnonymiserPdf: React.FC = (props: AnonymiserPdfProps) => {
     handleFileSelect,
     handleLoadSuccess,
     pdfFile,
+    setIsLoading,
+    error,
+    setError,
   } = useAnonymiserPdf(props);
+
+  const { showAlert } = useAlert();
 
   const onSubmit = async () => {
     if (!pdfFile || !selectedOption) {
+      setError("Veuillez sélectionner un fichier PDF ");
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
       return;
+    }
+    if (selectedOption === "filter") {
+      if (selectedFilters.length === 0) {
+        setError("Veuillez sélectionner au moins un filtre");
+        setTimeout(() => {
+          setError(null);
+        }, 3000);
+        return;
+      }
     }
 
     try {
-      await handleSubmit(pdfFile, selectedOption, selectedFilters);
+      setIsLoading(true);
+      await handleSubmit(pdfFile, selectedOption, selectedFilters).then(
+        (response) => {
+          if (response.success) {
+            setIsLoading(false);
+          } else {
+            showAlert({
+              message: "Erreur lors de l'anonymisation du PDF",
+              title: "Erreur",
+              type: AlertType.Error,
+              variant: AlertVariant.Standard,
+            });
+          }
+        }
+      );
     } catch (error) {
-      // Handle error (you might want to show a notification to the user)
+      showAlert({
+        message: "Erreur lors de l'anonymisation du PDF",
+        title: "Erreur",
+        type: AlertType.Error,
+        variant: AlertVariant.Standard,
+      });
+
       console.error("Failed to anonymize PDF:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -38,15 +89,13 @@ const AnonymiserPdf: React.FC = (props: AnonymiserPdfProps) => {
     <section className="section  newPageSection anonymiser-pdf">
       <LayoutEdit
         mainContent={
-          <div>
-            <PDFDropZone
-              onFileSelect={handleFileSelect}
-              onLoadSuccess={handleLoadSuccess}
-            />
-          </div>
+          <MemoizedPDFDropZone
+            onFileSelect={handleFileSelect}
+            onLoadSuccess={handleLoadSuccess}
+          />
         }
         sidebarContent={
-          <SidebarContent
+          <MemoizedSidebarContent
             onSubmit={onSubmit}
             radioOptions={radioOptions}
             filterOptions={filterOptions}
@@ -54,6 +103,9 @@ const AnonymiserPdf: React.FC = (props: AnonymiserPdfProps) => {
             setSelectedOption={setSelectedOption}
             selectedFilters={selectedFilters}
             setSelectedFilters={setSelectedFilters}
+            error={error}
+            isLoading={isLoading}
+            buttonText="Anonymiser le PDF"
           />
         }
         title="Anonymiseur PDF"
@@ -66,4 +118,4 @@ const AnonymiserPdf: React.FC = (props: AnonymiserPdfProps) => {
   );
 };
 
-export default AnonymiserPdf;
+export default React.memo(AnonymiserPdf);

@@ -4,6 +4,14 @@
   gap: 2rem;
 }
 
+.error {
+  color: red;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  height: 3rem;
+  text-align: center;
+}
+
 .anonymization-options {
   display: flex;
   flex-direction: column;
@@ -86,5 +94,12 @@
   }
   .label-filter-option {
     font-size: 1rem !important;
+  }
+  .error {
+    color: red;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    height: 3rem;
+    text-align: center;
   }
 }

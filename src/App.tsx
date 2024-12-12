@@ -5,11 +5,17 @@ import Footer from "./components/Footer/Footer";
 import appRoutes from "./appRoutes";
 import ToTop from "./components/ToTop/ToTop";
 
+import Spinner from "./components/Spinner/Spinner";
+import { useLoading } from "./context/LoadingContext";
+
 function App() {
+  const { isLoading } = useLoading();
+
   return (
     <div className="App" id="App">
       <Router>
         <ToTop />
+        {isLoading && <Spinner />}
         <Header />
         <article>
           <main>

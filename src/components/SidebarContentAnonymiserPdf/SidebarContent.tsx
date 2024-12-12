@@ -9,6 +9,9 @@ interface SidebarContentProps {
   setSelectedOption: (option: string) => void;
   selectedFilters: string[];
   setSelectedFilters: (filters: string[]) => void;
+  error: string | null;
+  isLoading: boolean;
+  buttonText: string;
 }
 
 const SidebarContent: React.FC<SidebarContentProps> = ({
@@ -19,6 +22,9 @@ const SidebarContent: React.FC<SidebarContentProps> = ({
   setSelectedOption,
   selectedFilters,
   setSelectedFilters,
+  error,
+  isLoading,
+  buttonText,
 }) => {
   const handleFilterChange = (filter: string) => {
     if (selectedFilters.includes(filter)) {
@@ -76,8 +82,9 @@ const SidebarContent: React.FC<SidebarContentProps> = ({
       </div>
 
       <button className="submit-button" onClick={onSubmit}>
-        Anonymiser le PDF
+        {isLoading ? "Anonymisation en cours..." : buttonText}
       </button>
+      {error && <p className="error">{error}</p>}
     </div>
   );
 };

@@ -8,6 +8,8 @@ export interface LayoutEditProps {
   title?: string;
   titleSidebar?: string;
   notes?: string;
+  isLoading?: boolean;
+  buttonText?: string;
 }
 
 export const useLayoutEdit = (props: LayoutEditProps) => {
