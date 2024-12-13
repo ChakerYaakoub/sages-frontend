@@ -37,6 +37,7 @@ export const useAnonymiserPdf = (props: AnonymiserPdfProps) => {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const { setIsLoading, isLoading } = useLoading();
   const [error, setError] = useState<string | null>(null);
+  const [wordsAreSelected, setWordsAreSelected] = useState<string[]>([]);
 
   // set is open false in the tablet
   const isTablet = window.innerWidth < 768;
@@ -74,5 +75,7 @@ export const useAnonymiserPdf = (props: AnonymiserPdfProps) => {
     setSelectedFilters,
     error,
     setError,
+    wordsAreSelected,
+    setWordsAreSelected,
   };
 };

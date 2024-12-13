@@ -16,6 +16,7 @@ function App() {
       <Router>
         <ToTop />
         {isLoading && <Spinner />}
+
         <Header />
         <article>
           <main>

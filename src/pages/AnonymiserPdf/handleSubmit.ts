@@ -9,7 +9,8 @@ import axios from "axios";
 export const handleSubmit = async (
   pdfFile: File,
   selectedOption: string,
-  selectedFilters: string[]
+  selectedFilters: string[],
+  wordsAreSelected: string[]
 ): Promise<{ success: boolean; error?: string }> => {
   try {
     const formData = new FormData();
@@ -18,6 +19,16 @@ export const handleSubmit = async (
 
     if (selectedOption === "filter") {
       formData.append("filters", JSON.stringify(selectedFilters));
+    }
+
+    if (wordsAreSelected.length > 0 && selectedOption === "manual") {
+      formData.append("words", JSON.stringify(wordsAreSelected));
+    }
+    if (wordsAreSelected.length === 0 && selectedOption === "manual") {
+      return {
+        success: false,
+        error: "You must select at least one word",
+      };
     }
 
     const response = await axios.post<Blob>("/api/anonymize-pdf", formData, {

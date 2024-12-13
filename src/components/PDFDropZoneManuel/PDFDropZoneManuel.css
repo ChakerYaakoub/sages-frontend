@@ -1,0 +1,461 @@
+.pdf-dropzone-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pdf-dropzone {
+  border: 2px dashed var(--theme-color);
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--cultured);
+}
+
+.pdf-dropzone.active {
+  border-color: var(--background-color);
+  background-color: rgba(0, 108, 181, 0.1);
+}
+
+.pdf-dropzone .upload-icon {
+  font-size: 48px;
+  color: var(--theme-color);
+  margin-bottom: 15px;
+}
+
+.pdf-dropzone p {
+  color: var(--sonic-silver);
+  margin: 0;
+}
+
+.file-input {
+  display: none;
+}
+
+.pdf-preview {
+  width: 100%;
+  padding: 20px;
+  background-color: var(--cultured);
+  border-radius: 10px;
+}
+
+.pdf-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 16px;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000;
+}
+
+.page-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.page-controls button {
+  padding: 5px 10px;
+  background-color: var(--theme-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.page-controls button:disabled {
+  background-color: var(--gray-x-11);
+  cursor: not-allowed;
+}
+
+.page-controls button:hover:not(:disabled) {
+  background-color: var(--background-color);
+}
+
+.pdf-document {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pdf-page {
+  max-width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-page canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+
+@media (max-width: 768px) {
+  .pdf-dropzone {
+    padding: 20px;
+  }
+
+  .pdf-controls {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .page-controls {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.pdf-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  color: var(--theme-color);
+  font-size: 1.2rem;
+}
+
+.pdf-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  color: #ff4444;
+  font-size: 1.2rem;
+}
+
+.selected-words {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid var(--theme-color);
+  border-radius: 5px;
+}
+
+.selected-words ul {
+  list-style: none;
+  padding: 0;
+}
+
+.selected-words li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  margin: 5px 0;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+}
+
+.remove-word-btn {
+  background: none;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 0 5px;
+}
+
+.remove-word-btn:hover {
+  color: #cc0000;
+}
+
+.react-pdf__Page__textContent {
+  user-select: text !important;
+  cursor: text !important;
+}
+
+.react-pdf__Page__textContent span {
+  cursor: text !important;
+}
+
+::selection {
+  background: rgba(255, 0, 0, 0.3) !important;
+  color: inherit;
+}
+
+.pdf-container {
+  position: relative;
+  width: 100%;
+}
+
+.selected-words-floating {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  z-index: 1000;
+}
+
+.selected-words-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.selected-word-tag {
+  background: rgba(255, 0, 0, 0.1);
+  color: #d32f2f;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.remove-word-btn {
+  border: none;
+  background: none;
+  color: #666;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.remove-word-btn:hover {
+  color: #ff4444;
+}
+
+/* Make PDF text selectable */
+.pdf-page-wrapper {
+  position: relative;
+  cursor: crosshair;
+  display: inline-block;
+}
+
+.pdf-page-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 20px at var(--mouse-x, 0) var(--mouse-y, 0),
+    rgba(255, 255, 0, 0.2) 0%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.pdf-page-wrapper:hover::after {
+  opacity: 1;
+}
+
+.pdf-page-container {
+  position: relative;
+  user-select: none;
+}
+
+.pdf-page {
+  position: relative;
+}
+
+.selected-word-tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: #e3f2fd;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin: 2px;
+  font-size: 14px;
+}
+
+.remove-word-btn {
+  background: none;
+  border: none;
+  margin-left: 4px;
+  cursor: pointer;
+  color: #666;
+}
+
+.remove-word-btn:hover {
+  color: #f44336;
+}
+
+.annotation-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.annotation-mark {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(255, 255, 0, 0.3);
+  border: 2px solid rgba(255, 200, 0, 0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.annotation-mark:hover {
+  background-color: rgba(255, 255, 0, 0.5);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.annotation-text {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.annotation-mark:hover .annotation-text {
+  opacity: 1;
+}
+
+.pdf-page-wrapper {
+  position: relative;
+  cursor: crosshair;
+  display: inline-block;
+}
+
+.pdf-page-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 20px at var(--mouse-x, 0) var(--mouse-y, 0),
+    rgba(255, 255, 0, 0.2) 0%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.pdf-page-wrapper:hover::after {
+  opacity: 1;
+}
+
+.pdf-page-wrapper.selecting {
+  cursor: crosshair;
+}
+
+.pdf-page-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* This is crucial for proper text layer positioning */
+.react-pdf__Page {
+  position: relative;
+}
+
+/* Style the text layer to overlay perfectly on the PDF */
+.react-pdf__Page__textContent {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  overflow: hidden;
+  opacity: 0.01;
+  line-height: 1;
+  user-select: text !important;
+  cursor: text !important;
+  transform: none !important;
+}
+
+.react-pdf__Page__textContent > span {
+  position: absolute !important;
+  color: transparent;
+  user-select: text !important;
+  cursor: text !important;
+  transform-origin: 0% 0%;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(255, 0, 0, 0.3) !important;
+  color: inherit;
+}
+
+.pdf-highlights-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.pdf-highlight {
+  position: absolute;
+  background-color: rgba(255, 0, 0, 0.3);
+  border-radius: 2px;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pdf-highlight:hover {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.highlighted-text {
+  background-color: rgba(255, 255, 0, 0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.highlighted-text:hover {
+  background-color: rgba(255, 255, 0, 0.5);
+}
+
+/* Make sure text layer is visible and clickable */
+.textLayer {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.highlighted-text {
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.highlighted-text:hover {
+  filter: brightness(0.9);
+}
