@@ -8,6 +8,7 @@ export interface LayoutEditProps {
   title?: string;
   titleSidebar?: string;
   notes?: string;
+  notesInBottom?: string;
   isLoading?: boolean;
   buttonText?: string;
 }

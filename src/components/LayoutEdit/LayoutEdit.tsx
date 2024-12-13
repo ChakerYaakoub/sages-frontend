@@ -11,6 +11,7 @@ const LayoutEdit: React.FC<LayoutEditProps> = ({
   title,
   titleSidebar,
   notes,
+  notesInBottom,
 }) => {
   return (
     <div className="layout-edit">
@@ -21,6 +22,9 @@ const LayoutEdit: React.FC<LayoutEditProps> = ({
         </div>
         <div className="layout-edit-content">
           {mainContent || <div>Main Content Area</div>}
+        </div>
+        <div className="layout-edit-header">
+          <h5 className="notes-layout">{notesInBottom}</h5>
         </div>
       </div>
       <div className={`sidebar ${isOpen ? "open" : "closed"}`}>

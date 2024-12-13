@@ -130,9 +130,14 @@ const AnonymiserPdf: React.FC = (props: AnonymiserPdfProps) => {
             buttonText="Anonymiser le PDF"
           />
         }
-        title="Anonymiseur PDF"
+        title={`Anonymiseur PDF : ${selectedOption.toUpperCase()}`}
         notes="Anonymisez facilement vos fichiers PDF en les glissant-déposant ou en sélectionnant votre fichier PDF"
         titleSidebar="Outils d'anonymisation PDF"
+        notesInBottom={`${
+          selectedOption === "manual"
+            ? "Vous pouvez également anonymiser votre PDF manuellement en sélectionnant les mots à anonymiser."
+            : ""
+        }`}
         isOpen={isOpen}
         onToggle={handleToggle}
       />
