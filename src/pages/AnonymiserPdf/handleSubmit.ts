@@ -10,7 +10,8 @@ export const handleSubmit = async (
   pdfFile: File,
   selectedOption: string,
   selectedFilters: string[],
-  wordsAreSelected: string[]
+  wordsAreSelected: string[],
+  optionManuel: string
 ): Promise<{ success: boolean; error?: string }> => {
   try {
     const formData = new FormData();
@@ -23,6 +24,7 @@ export const handleSubmit = async (
 
     if (wordsAreSelected.length > 0 && selectedOption === "manual") {
       formData.append("words", JSON.stringify(wordsAreSelected));
+      formData.append("optionManuel", optionManuel);
     }
     if (wordsAreSelected.length === 0 && selectedOption === "manual") {
       return {
@@ -31,12 +33,16 @@ export const handleSubmit = async (
       };
     }
 
-    const response = await axios.post<Blob>("http://127.0.0.1:5000/api/anonymize-pdf", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      responseType: "blob",
-    });
+    const response = await axios.post<Blob>(
+      "http://127.0.0.1:5000/api/anonymize-pdf",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        responseType: "blob",
+      }
+    );
 
     // Verify the response is actually a PDF
     if (response.headers["content-type"] !== "application/pdf") {

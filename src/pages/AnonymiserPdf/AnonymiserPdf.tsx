@@ -37,6 +37,8 @@ const AnonymiserPdf: React.FC = (props: AnonymiserPdfProps) => {
     setIsLoading,
     error,
     setError,
+    optionManuel,
+    setOptionManuel,
   } = useAnonymiserPdf(props);
 
   const { showAlert } = useAlert();
@@ -66,7 +68,8 @@ const AnonymiserPdf: React.FC = (props: AnonymiserPdfProps) => {
         pdfFile,
         selectedOption,
         selectedFilters,
-        wordsAreSelected
+        wordsAreSelected,
+        optionManuel
       ).then((response) => {
         if (response.success) {
           setIsLoading(false);
@@ -125,6 +128,8 @@ const AnonymiserPdf: React.FC = (props: AnonymiserPdfProps) => {
             setSelectedOption={setSelectedOption}
             selectedFilters={selectedFilters}
             setSelectedFilters={setSelectedFilters}
+            optionManuel={optionManuel}
+            setOptionManuel={setOptionManuel}
             error={error}
             isLoading={isLoading}
             buttonText="Anonymiser le PDF"

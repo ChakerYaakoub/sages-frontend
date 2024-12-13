@@ -12,6 +12,8 @@ interface SidebarContentProps {
   error: string | null;
   isLoading: boolean;
   buttonText: string;
+  optionManuel: string;
+  setOptionManuel: (option: string) => void;
 }
 
 const SidebarContent: React.FC<SidebarContentProps> = ({
@@ -25,6 +27,8 @@ const SidebarContent: React.FC<SidebarContentProps> = ({
   error,
   isLoading,
   buttonText,
+  optionManuel,
+  setOptionManuel,
 }) => {
   const handleFilterChange = (filter: string) => {
     if (selectedFilters.includes(filter)) {
@@ -53,6 +57,40 @@ const SidebarContent: React.FC<SidebarContentProps> = ({
               <label htmlFor={option.id}>{option.label}</label>
             </div>
             <p className="description">{option.description}</p>
+            {option.id === "manual" && selectedOption === "manual" && (
+              <div className=" option-radio-manual">
+                <div className="option-radio">
+                  <input
+                    type="radio"
+                    id="word"
+                    name="optionManuel" // Fixed name attribute to avoid conflict
+                    value="word"
+                    checked={optionManuel === "word"}
+                    className="checkbox-filter-manual"
+                    onChange={() => setOptionManuel("word")}
+                  />
+                  <label htmlFor="word" className="sub-label">
+                    Anonymiser mot par mot
+                  </label>{" "}
+                  <br />
+                </div>
+                <div className="option-radio">
+                  <input
+                    type="radio"
+                    id="mask"
+                    name="optionManuel" // Fixed name attribute to avoid conflict
+                    value="mask"
+                    className="checkbox-filter-manual"
+                    checked={optionManuel === "mask"}
+                    onChange={() => setOptionManuel("mask")}
+                  />
+                  <label htmlFor="mask" className="sub-label">
+                    Anonymiser avec un masque : ######
+                  </label>{" "}
+                  {/* Fixed htmlFor attribute */}
+                </div>
+              </div>
+            )}
 
             {option.id === "filter" && selectedOption === "filter" && (
               <div className="filter-options">
@@ -67,7 +105,7 @@ const SidebarContent: React.FC<SidebarContentProps> = ({
                         className="checkbox-filter"
                       />
                       <label
-                        className="label-filter-option"
+                        className="label-filter-option sub-label"
                         htmlFor={filter.id}
                       >
                         {filter.label}

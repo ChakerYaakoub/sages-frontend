@@ -14,7 +14,8 @@ export const useAnonymiserPdf = (props: AnonymiserPdfProps) => {
     {
       id: "manual",
       label: "Manuel",
-      description: "Sélectionnez manuellement les zones à anonymiser",
+      description:
+        "Sélectionnez les zones à anonymiser (mot par mot ou par masque) :",
     },
     {
       id: "filter",
@@ -38,6 +39,12 @@ export const useAnonymiserPdf = (props: AnonymiserPdfProps) => {
   const { setIsLoading, isLoading } = useLoading();
   const [error, setError] = useState<string | null>(null);
   const [wordsAreSelected, setWordsAreSelected] = useState<string[]>([]);
+
+  // if its choice the manuel then we have 2 option :
+  // 1. select the words to anonymize to word
+  // 2. select the words to anonymize to ######
+
+  const [optionManuel, setOptionManuel] = useState<string>("word");
 
   // set is open false in the tablet
   const isTablet = window.innerWidth < 768;
@@ -77,5 +84,7 @@ export const useAnonymiserPdf = (props: AnonymiserPdfProps) => {
     setError,
     wordsAreSelected,
     setWordsAreSelected,
+    optionManuel,
+    setOptionManuel,
   };
 };
