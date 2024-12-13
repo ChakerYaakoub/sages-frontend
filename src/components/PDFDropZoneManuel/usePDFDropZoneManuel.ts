@@ -20,7 +20,7 @@ export interface PDFDropZoneManuelProps {
   onFileSelect?: (file: File) => void;
   onLoadSuccess?: (numPages: number) => void;
   onDelete?: () => void;
-  setWordsAreSelected?: React.Dispatch<React.SetStateAction<string[]>>;
+  setWordsAreSelected?: (words: string[]) => void;
 }
 
 export const usePDFDropZoneManuel = ({
