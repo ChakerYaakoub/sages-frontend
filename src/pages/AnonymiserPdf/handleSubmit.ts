@@ -31,7 +31,7 @@ export const handleSubmit = async (
       };
     }
 
-    const response = await axios.post<Blob>("/api/anonymize-pdf", formData, {
+    const response = await axios.post<Blob>("http://127.0.0.1:5000/api/anonymize-pdf", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
