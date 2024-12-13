@@ -94,7 +94,7 @@ const AnonymiserPdf: React.FC = (props: AnonymiserPdfProps) => {
         variant: AlertVariant.Standard,
       });
 
-      console.error("Failed to anonymize PDF:", error);
+      console.error("Erreur lors de l'anonymisation du PDF:", error);
     } finally {
       setIsLoading(false);
     }

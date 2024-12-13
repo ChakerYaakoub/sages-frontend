@@ -68,9 +68,9 @@ const Header: React.FC<HeaderProps> = (props) => {
             </li> */}
 
             <li className="navbar-link navbar-button-login-register">
-              <button className="navbar-button-login">login</button>
+              <button className="navbar-button-login"> se connecter</button>
 
-              <button className="navbar-button-register">register</button>
+              <button className="navbar-button-register">s'inscrire</button>
             </li>
 
             {/* <li className="navbar-link hidden-on-mobile ">

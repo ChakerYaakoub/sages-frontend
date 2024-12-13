@@ -4,6 +4,7 @@
   align-items: center;
   min-height: 90vh;
   padding-block-end: 0px !important;
+  background-color: transparent !important;
 }
 
 .MyNotfound {

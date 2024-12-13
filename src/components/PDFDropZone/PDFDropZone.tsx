@@ -78,7 +78,7 @@ const PDFDropZone: React.FC<PDFDropZoneProps> = ({
           onClick={() => fileInputRef.current?.click()}
         >
           <IoCloudUploadOutline className="upload-icon" />
-          <p>Drag and drop a PDF here or click to upload</p>
+          <p>Glissez et déposez un PDF ici ou cliquez pour télécharger</p>
           <input
             type="file"
             ref={fileInputRef}
@@ -91,14 +91,14 @@ const PDFDropZone: React.FC<PDFDropZoneProps> = ({
         <div className="pdf-preview">
           <div className="pdf-controls">
             <button onClick={handleDelete} className="delete-btn">
-              <MdDeleteOutline /> Delete
+              <MdDeleteOutline /> Supprimer
             </button>
             <div className="page-controls">
               <button onClick={previousPage} disabled={pageNumber <= 1}>
                 &#8592;
               </button>
               <span>
-                Page {pageNumber} of {numPages}
+                Page {pageNumber} sur {numPages}
               </span>
               <button onClick={nextPage} disabled={pageNumber >= numPages}>
                 &#8594;

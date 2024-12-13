@@ -96,7 +96,7 @@
 @media (max-width: 1200px) {
   .home-container1 {
     grid-template-columns: 100%;
-    min-height: 30vh;
+    min-height: 45vh;
   }
   .home-container1-image {
     display: none;

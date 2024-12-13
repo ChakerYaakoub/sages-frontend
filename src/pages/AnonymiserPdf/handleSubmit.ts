@@ -40,7 +40,7 @@ export const handleSubmit = async (
 
     // Verify the response is actually a PDF
     if (response.headers["content-type"] !== "application/pdf") {
-      throw new Error("Received invalid file format from server");
+      throw new Error("Format de fichier invalide reçu du serveur");
     }
 
     const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -54,11 +54,13 @@ export const handleSubmit = async (
 
     return { success: true };
   } catch (error) {
-    console.error("Error anonymizing PDF:", error);
+    console.error("Erreur lors de l'anonymisation du PDF:", error);
     return {
       success: false,
       error:
-        error instanceof Error ? error.message : "An unknown error occurred",
+        error instanceof Error
+          ? error.message
+          : "Une erreur inconnue est survenue",
     };
   }
 };
